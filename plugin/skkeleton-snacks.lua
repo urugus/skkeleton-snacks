@@ -16,9 +16,13 @@ end
 -- 依存プラグインのチェックは行わない
 -- lazy.nvim などのプラグインマネージャーが依存関係を処理するため
 
--- プラグインの初期化
--- ユーザーが明示的に setup() を呼び出さない場合でも動作するように
-vim.defer_fn(function()
-  -- 遅延実行することで、依存プラグインが読み込まれた後に実行される
-  require("skkeleton_snacks").setup()
-end, 100)
+-- プラグインの初期化を VimEnter イベント後に遅延させる
+vim.api.nvim_create_autocmd("VimEnter", {
+  callback = function()
+    -- さらに遅延させて、確実に依存プラグインが読み込まれた後に実行されるようにする
+    vim.defer_fn(function()
+      require("skkeleton_snacks").setup()
+    end, 500)
+  end,
+  once = true,
+})

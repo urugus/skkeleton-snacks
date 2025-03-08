@@ -23,13 +23,21 @@ function M.setup(opts)
   -- 依存関係のチェック（遅延実行のため、setup 内でチェック）
   local has_skkeleton = pcall(require, "skkeleton")
   if not has_skkeleton then
-    vim.notify("skkeleton-snacks.nvim: skkeleton is not available", vim.log.levels.WARN)
+    vim.notify("skkeleton-snacks.nvim: skkeleton is not available, will retry later", vim.log.levels.WARN)
+    -- 少し遅延させて再試行
+    vim.defer_fn(function()
+      M.setup(opts)
+    end, 1000)
     return
   end
 
   local has_snacks = pcall(require, "snacks")
   if not has_snacks then
-    vim.notify("skkeleton-snacks.nvim: snacks.nvim is not available", vim.log.levels.WARN)
+    vim.notify("skkeleton-snacks.nvim: snacks.nvim is not available, will retry later", vim.log.levels.WARN)
+    -- 少し遅延させて再試行
+    vim.defer_fn(function()
+      M.setup(opts)
+    end, 1000)
     return
   end
 
