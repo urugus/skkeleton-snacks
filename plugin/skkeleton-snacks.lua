@@ -13,16 +13,6 @@ if vim.fn.has("nvim-0.7.0") == 0 then
   return
 end
 
--- 依存プラグインのチェックは行わない
--- lazy.nvim などのプラグインマネージャーが依存関係を処理するため
-
--- プラグインの初期化を VimEnter イベント後に遅延させる
-vim.api.nvim_create_autocmd("VimEnter", {
-  callback = function()
-    -- さらに遅延させて、確実に依存プラグインが読み込まれた後に実行されるようにする
-    vim.defer_fn(function()
-      require("skkeleton_snacks").setup()
-    end, 500)
-  end,
-  once = true,
-})
+-- プラグインの初期化は lazy.nvim などのプラグインマネージャーに任せる
+-- 明示的に setup() を呼び出す必要がある場合は以下のコメントを解除する
+-- require("skkeleton_snacks").setup()
