@@ -1,4 +1,4 @@
-# skkeleton-snacks.nvim
+# skkeleton-snacks
 
 Neovim プラグイン: snacks.nvim の picker で skkeleton による日本語入力を可能にします。
 
@@ -14,7 +14,7 @@ snacks.nvim の picker は通常、日本語入力に対応していませんが
 
 ```lua
 {
-  "urugus/skkeleton-snacks.nvim",
+  "urugus/skkeleton-snacks",
   dependencies = {
     "vim-skk/skkeleton",
     "folke/snacks.nvim",
@@ -27,7 +27,7 @@ snacks.nvim の picker は通常、日本語入力に対応していませんが
 
 ```lua
 use {
-  "urugus/skkeleton-snacks.nvim",
+  "urugus/skkeleton-snacks",
   requires = {
     "vim-skk/skkeleton",
     "folke/snacks.nvim",
